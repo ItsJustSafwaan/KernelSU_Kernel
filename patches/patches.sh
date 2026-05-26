@@ -74,3 +74,8 @@ for i in "${patch_files[@]}"; do
     esac
 
 done
+
+# Fix Xiaomi legacy scheduler tracepoint compilation panic
+if [ -f "kernel_workspace/android-kernel/include/trace/events/sched.h" ]; then
+    sed -i '/#error "Unsupported NR_CPUS for lb tracepoint."/d' kernel_workspace/android-kernel/include/trace/events/sched.h
+fi
